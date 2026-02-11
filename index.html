@@ -22,13 +22,33 @@
             height: 100%;
             object-fit: cover;
         }
+
+        #cookieBanner {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.9);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        #cookieBanner button {
+            padding: 10px 20px;
+            border: none;
+            background: #00d4ff;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
 <div id="videoContainer">
     <video id="myVideo"
-           src="https://thumbs.dreamstime.com/videothumb_large11953/119534842.webm"
+           src=""
            autoplay
            muted
            playsinline>
@@ -37,33 +57,33 @@
 
 <audio id="bgAudio" src="audio.mp3"></audio>
 
+<div id="cookieBanner">
+    This website uses cookies.
+    <button id="acceptBtn">Accept Cookies</button>
+</div>
+
 <script>
     const video = document.getElementById("myVideo");
     const audio = document.getElementById("bgAudio");
     const container = document.getElementById("videoContainer");
+    const banner = document.getElementById("cookieBanner");
+    const acceptBtn = document.getElementById("acceptBtn");
 
-    window.addEventListener("load", function () {
+    acceptBtn.addEventListener("click", function () {
 
-        setTimeout(() => {
+        // Hide banner
+        banner.style.display = "none";
 
-            // Fullscreen
-            if (container.requestFullscreen) {
-                container.requestFullscreen();
-            } else if (container.webkitRequestFullscreen) {
-                container.webkitRequestFullscreen();
-            } else if (container.msRequestFullscreen) {
-                container.msRequestFullscreen();
-            }
+        // Request fullscreen
+        if (container.requestFullscreen) {
+            container.requestFullscreen();
+        }
 
-            // Unmute video
-            video.muted = false;
+        // Unmute video
+        video.muted = false;
 
-            // Try playing background audio
-            audio.play().catch(() => {
-                console.log("Autoplay blocked by browser");
-            });
-
-        }, 1000);
+        // Play audio
+        audio.play().catch(() => {});
 
     });
 </script>
