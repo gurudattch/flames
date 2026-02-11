@@ -9,6 +9,7 @@
             height: 100%;
             background: black;
             overflow: hidden;
+            font-family: Arial, sans-serif;
         }
 
         #videoContainer {
@@ -23,24 +24,33 @@
             object-fit: cover;
         }
 
+        /* Centered Cookie Modal */
         #cookieBanner {
             position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: rgba(0,0,0,0.9);
-            color: white;
-            padding: 20px;
-            text-align: center;
+            inset: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.6);
             z-index: 1000;
         }
 
-        #cookieBanner button {
+        .cookieBox {
+            background: white;
+            color: black;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+        }
+
+        .cookieBox button {
+            margin-top: 15px;
             padding: 10px 20px;
             border: none;
             background: #00d4ff;
-            color: black;
-            font-weight: bold;
             cursor: pointer;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -48,7 +58,7 @@
 
 <div id="videoContainer">
     <video id="myVideo"
-           src=""
+           src="https://thumbs.dreamstime.com/videothumb_large11953/119534842.webm"
            autoplay
            muted
            playsinline>
@@ -58,8 +68,10 @@
 <audio id="bgAudio" src="audio.mp3"></audio>
 
 <div id="cookieBanner">
-    This website uses cookies.
-    <button id="acceptBtn">Accept Cookies</button>
+    <div class="cookieBox">
+        <p>This website uses cookies to improve experience.</p>
+        <button id="acceptBtn">Accept Cookies</button>
+    </div>
 </div>
 
 <script>
@@ -71,20 +83,15 @@
 
     acceptBtn.addEventListener("click", function () {
 
-        // Hide banner
         banner.style.display = "none";
 
-        // Request fullscreen
         if (container.requestFullscreen) {
             container.requestFullscreen();
         }
 
-        // Unmute video
         video.muted = false;
 
-        // Play audio
         audio.play().catch(() => {});
-
     });
 </script>
 
